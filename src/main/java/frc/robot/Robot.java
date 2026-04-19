@@ -5,8 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Subsystems.DriveTrain;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -18,6 +20,10 @@ public class Robot extends TimedRobot {
     private static final String kCustomAuto = "My Auto";
     private String m_autoSelected;
     private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+    private DriveTrain m_drive_train = new DriveTrain();
+
+    private XboxController m_controller = new XboxController(0);
 
     public Robot() {
         // m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
@@ -39,7 +45,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
-        System.out.println("rji4hutgy");
+        m_drive_train.drive(-m_controller.getRawAxis(1), m_controller.getRawAxis(0));
+        System.out.println(m_drive_train.getMotor());
     }
 
     @Override
